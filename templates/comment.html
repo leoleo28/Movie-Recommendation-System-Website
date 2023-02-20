@@ -1,0 +1,60 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/3326c36ed0.js" crossorigin="anonymous"></script>
+    <title>Movie Recommendation System</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <h1 class="logo">Movies</h1><i class="fa-solid fa-clapperboard"></i>
+            </div>
+            <div class="profile-container">
+                <a href="/" style="color: #4dbf00;"><span><i class="fa fa-home" aria-hidden="true" style="padding-right: 5px;"></i>Home</span></a>
+                <a href="/frontpage/{{movie}}"><span style="color: #4dbf00;">Return</span></a>
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-container">
+                <div class="featured-cm-content">
+                    <div class="content-comment_left">
+                        <div class="movie_header" style="font-size: 40px; color: white;" ><div><span>{{movie}}</span><span style="font-size: 36px;">: viewers reviews</span></div></div>
+                        {% for c in all %}
+                        <div class="comment-block">
+                            <div class="cm_sentiment">
+                                {{c.sentiment}}
+                            </div>
+                            <div class="cm_text">
+                                {{c.text}}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="content-right">
+                        <img src="{{img_url}}" style="height:700px;border-radius: 30px;" alt="">
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script src="{% static 'app.js' %}"></script>
+</body>
+
+</html>

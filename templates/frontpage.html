@@ -1,0 +1,92 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/3326c36ed0.js" crossorigin="anonymous"></script>
+    <title>Movie Recommendation System</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <h1 class="logo">Movies</h1><i class="fa-solid fa-clapperboard"></i>
+            </div>
+            <div class="profile-container">
+                <a href="/" style="color: #4dbf00;"><span><i class="fa fa-home" aria-hidden="true" style="padding-right: 5px;"></i>Home</span></a>
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-container">
+                <div class="featured-content">
+                    <div class="content-left">
+                        <div class="movie_header" style="font-size: 40px; color: white;" ><div>{{selected_movie}}</div></div>
+                        <p class="featured-desc">{{text}}</p>
+                        <div>
+                            <span class="mv_detail"><i class="fa-solid fa-calendar"></i>{{date}}</span><span class="mv_detail"><i class="fa-solid fa-star"></i>{{rate}}</span><span class="mv_detail"><i class="fa-solid fa-clock"></i>{{runtime}}</span>
+                        </div>
+                        <div class="mv_info">
+                            {{director}}
+                        </div>
+                        <div class="mv_info">
+                            {{genres}}
+                        </div>
+                        <div>
+                            <a href="{{get_trailer_url}}"><button class="featured-button"><span style="transition: 1.2s;"></span><div style="display: inline-block;"><i class="fa-solid fa-play"></i></div><div style="display:inline-block">Trailer</div></button></a><a href="{{homepage_link}}"><button class="featured-button"><span style="transition: 1.2s;"></span><div style="display: inline-block;">IMDB</div></button></a>
+                        </div>
+                    </div>
+                    <div class="content-right">
+                        <img src="{{url}}" style="height:700px;border-radius: 30px;" alt="">
+                    </div>
+                </div>
+                <br><br>
+                <div class="actor_header" style="font-size: 40px;position: relative;left:20px;"><div>Actors</div></div>
+                <div class="container-actor">
+                    {% for actor in cast %}
+                    <div class="content-actor">
+                        <div>{{actor.name}}</div>
+                        <img src="{{actor.image}}"  alt="">
+                    </div>
+                    {% endfor %}
+                </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">Similar movies to {{selected_movie}}</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for movie in movie_list %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="{{movie.image}}" alt="">
+                            <span class="movie-list-item-title">{{movie.name}}</span>
+                            <a href="/frontpage/{{movie.name}}"><button class="movie-list-item-button">Watch</button></a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+            <div class="container-comment">
+                <!-- <a href="/mcomment/{{selected_movie}}"><button class="featured-button"><span style="background-color: #4dbf00;height: 100%;width:100%;position: absolute;left: 0;bottom:0;border-radius: 20px;z-index: -1;transition: 0.8s;border:2px solid  #4dbf00"></span><div style="display: inline-block;">View Comments</div></button></a> -->
+                <a href="/mcomment/{{selected_movie}}"><button class="featured-button"><span style="transition:0.8s"></span><div style="display: inline-block;">View Comments</div></button></a>
+                <div style="position: relative;left:10px;top:3px;display:inline-block;">Note: Fetching movie reviews with sentiment analysis will take a moment</div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'app.js' %}"></script>
+</body>
+
+</html>

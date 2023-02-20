@@ -1,0 +1,49 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/3326c36ed0.js" crossorigin="anonymous"></script>
+    <title>Movie Recommendation System</title>
+</head>
+
+<body style="overflow: hidden;">
+        <div class="list_navbar">
+            <div class="navbar-container">
+                <div class="logo-container">
+                    <h1 class="logo">Movies</h1><i class="fa-solid fa-clapperboard"></i>
+                </div>
+                <div class="profile-container">
+                    <div class="toggle">
+                        <i class="fas fa-moon toggle-icon"></i>
+                        <i class="fas fa-sun toggle-icon"></i>
+                        <div class="toggle-ball"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="choice-container">
+            <form action="" method="POST">
+            {% csrf_token %}
+            <div class="choice-mid-container">
+                <input type="text" list="movies" name="selected_movie" placeholder="Enter or select a movie from the dropdown">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true" style="font-size: 22px;"></i></button>
+                <datalist id="movies">
+                    {% for m in all %}
+                    <option value="{{m.name}}"></option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            </form>
+        </div>
+        <script src="{% static 'app.js' %}"></script>
+</body>
+
+</html>
